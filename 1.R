@@ -67,13 +67,15 @@ rankall <- function(outcome, num = "best") {
 		data1[,3]<-as.numeric(data1[,3])
 		if(num == "worst"){
 			data2<-data1[order(-data1[,3]),]
-			temp<-as.vector(data2[1,2],i)}
+			temp<-cbind(data2[1,2],i)}
 		else if(num== "best"){
 			data2<-data1[order(data1[,3]),]
-			temp<-as.vector(data2[1,2],i)}
+			temp<-cbind(data2[1,2],i)}
 		else {
 			data2<-data1[order(data1[,3]),]
-			temp<-as.vector(data2[num,2],i)}
+			temp<-cbind(data2[num,2],i)}
 		result<-rbind(result,as.matrix(temp))}
-	result[order(result[,1]),]
+	result1<-result[order(result[,2]),]
+	v2<-is.na(result1[,2])==FALSE
+	result1[v2,]
 }
